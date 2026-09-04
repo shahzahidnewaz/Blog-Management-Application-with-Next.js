@@ -1,0 +1,6 @@
+node_modules
+uploads/profile-images/*
+!uploads/profile-images/.gitkeep
+.env
+.env.local
+.env.*.local
