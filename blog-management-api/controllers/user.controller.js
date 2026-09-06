@@ -169,7 +169,11 @@ export const updateProfileImage = async (req, res) => {
 
 export const updateOwnPassword = async (req, res) => {
     try {
-        const { password } = req.body;
+        const { currentPassword, password } = req.body;
+
+        if (!isNonEmptyString(currentPassword)) {
+            return res.status(400).json({ message: "Current password is required" });
+        }
 
         if (!isValidPassword(password)) {
             return res.status(400).json({ message: "Password must be at least 6 characters long" });
@@ -178,6 +182,11 @@ export const updateOwnPassword = async (req, res) => {
         const user = await User.findByPk(req.user.id);
         if (!user) {
             return res.status(404).json({ message: "User not found" });
+        }
+
+        const isCurrentPasswordValid = await bcrypt.compare(currentPassword, user.password);
+        if (!isCurrentPasswordValid) {
+            return res.status(401).json({ message: "Current password is incorrect" });
         }
 
         user.password = await bcrypt.hash(password, SALT_ROUNDS);
