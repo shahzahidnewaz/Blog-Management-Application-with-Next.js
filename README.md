@@ -165,5 +165,16 @@ The frontend has no data of its own — every page reads from and writes to the 
 **Admin:** everything a user can do, plus view all users, activate/deactivate any user, and update/delete any user's blog.
 
 ## Screenshots
-
-screenshots of the homepage, a blog detail page, dashboard, profile, forgot/reset password flow, and admin users page here
+![Homepage](Homepage.png)
+![Read More](<Blog- Read More.png>)
+![Registration](Registration.png)
+![Login](<Log In.png>)
+![Forgot Password](<Forgot Password.png>)
+![Admin Dashboard](<Admin Dashboard.png>)
+![Admin Profile](<Admin Profile.png>)
+![All Blogs](<All Blogs.png>)
+![Users](Users.png)
+![Create Blog](<Create Blog.png>)
+![Change Password](<Change Password.png>)
+![User Dashboard](<User Dashboard.png>)
+![User Blogs](<My Blogs.png>)

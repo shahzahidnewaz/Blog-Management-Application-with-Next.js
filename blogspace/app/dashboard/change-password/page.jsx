@@ -7,6 +7,7 @@ import { updateOwnPassword } from "@/services/user.service";
 import { getErrorMessage } from "@/services/api";
 
 function ChangePasswordContent() {
+  const [currentPassword, setCurrentPassword] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -16,6 +17,7 @@ function ChangePasswordContent() {
 
   function validate() {
     const next = {};
+    if (!currentPassword) next.currentPassword = "Current password is required.";
     if (password.length < 6) next.password = "Password must be at least 6 characters.";
     if (confirmPassword !== password) next.confirmPassword = "Passwords don't match.";
     setErrors(next);
@@ -29,8 +31,9 @@ function ChangePasswordContent() {
     if (!validate()) return;
     setSubmitting(true);
     try {
-      await updateOwnPassword(password);
+      await updateOwnPassword(currentPassword, password);
       setNotice("Password updated successfully.");
+      setCurrentPassword("");
       setPassword("");
       setConfirmPassword("");
     } catch (err) {
@@ -47,6 +50,22 @@ function ChangePasswordContent() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <Alert type="error">{submitError}</Alert>
         <Alert type="success">{notice}</Alert>
+
+        <div>
+          <label htmlFor="currentPassword" className="block text-sm font-medium text-ink-700 mb-1.5">
+            Current password
+          </label>
+          <input
+            id="currentPassword"
+            type="password"
+            value={currentPassword}
+            onChange={(e) => setCurrentPassword(e.target.value)}
+            className="w-full rounded-md border border-ink-200 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-moss-400"
+          />
+          {errors.currentPassword && (
+            <p className="mt-1 text-xs text-clay-600">{errors.currentPassword}</p>
+          )}
+        </div>
 
         <div>
           <label htmlFor="password" className="block text-sm font-medium text-ink-700 mb-1.5">

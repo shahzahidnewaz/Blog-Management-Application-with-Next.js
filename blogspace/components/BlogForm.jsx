@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Alert from "./Alert";
 import { DEFAULT_CATEGORIES } from "./CategoryFilter";
+import { ChevronDown } from "lucide-react";
 
 const CATEGORY_OPTIONS = DEFAULT_CATEGORIES.filter((c) => c !== "All");
 
@@ -71,18 +72,24 @@ export default function BlogForm({ initialValues, submitLabel, pendingLabel, onS
         <label htmlFor="category" className="block text-sm font-medium text-ink-700 mb-1.5">
           Category
         </label>
-        <select
-          id="category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="w-full rounded-md border border-ink-200 px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-moss-400"
-        >
-          {categoryOptions.map((c) => (
-            <option key={c} value={c}>
-              {c}
-            </option>
-          ))}
-        </select>
+                <div className="relative">
+          <select
+            id="category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="w-full appearance-none rounded-md border border-ink-200 pl-3 pr-10 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-moss-400"
+          >
+            {categoryOptions.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
+          <ChevronDown
+            size={16}
+            className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-ink-500"
+          />
+        </div>
         {errors.category && <p className="mt-1 text-sm text-clay-600">{errors.category}</p>}
       </div>
 

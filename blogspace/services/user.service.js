@@ -6,8 +6,8 @@ export const getOwnProfile = () =>
 export const updateOwnProfile = (payload) =>
   api.put("/api/users/profile/update", payload).then((res) => res.data);
 
-export const updateOwnPassword = (password) =>
-  api.patch("/api/users/password", { password }).then((res) => res.data);
+export const updateOwnPassword = (currentPassword, password) =>
+  api.patch("/api/users/password", { currentPassword, password }).then((res) => res.data);
 
 export const updateProfileImage = (file) => {
   const formData = new FormData();

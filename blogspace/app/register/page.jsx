@@ -118,7 +118,11 @@ export default function RegisterPage() {
               onChange={update("password")}
               className="w-full rounded-md border border-ink-200 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-moss-400"
             />
-            {errors.password && <p className="mt-1 text-xs text-clay-600">{errors.password}</p>}
+                        {errors.password ? (
+              <p className="mt-1 text-xs text-clay-600">{errors.password}</p>
+            ) : (
+              <p className="mt-1 text-xs text-ink-500">Must be at least 6 characters.</p>
+            )}
           </div>
 
           <div>
